@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>$5 Worldwide ALL 195 Countries → MTN 0789525512</title>
+<style>
+body{font-family:sans-serif;background:#0f0f0f;color:#fff;margin:0;padding:12px}
+.card{background:#1a1a1a;padding:18px;border-radius:16px;max-width:520px;margin:auto;border:1px solid #333}
+h2{color:#E2136E;margin:0} .box{background:#2a0a1a;padding:12px;border-radius:10px;margin:12px 0;border:1px solid #E2136E}
+select,input{width:100%;padding:14px;margin:7px 0;border-radius:10px;border:1px solid #444;background:#222;color:#fff;font-size:16px;box-sizing:border-box}
+button{background:#E2136E;color:#fff;border:0;padding:16px;width:100%;border-radius:10px;font-size:18px;font-weight:bold}
+small{color:#888}
+</style></head><body>
+<div class="card">
+<h2>🤖 AI Bot $5 = ALL Countries</h2>
+<p>ALL 195 countries - local money + local payment. You get <b style="color:#E2136E">20,000 UGX → 0789525512</b></p>
+<div class="box" id="show">Loading 195 countries...</div>
+<select id="c" onchange="upd()"></select>
+<input id="email" placeholder="Email for bot access">
+<input id="phone" placeholder="Phone / MoMo number">
+<input id="name" placeholder="Full Name">
+<input id="ipn" placeholder="Paste ipn_id from /api/pesapal/register-ipn">
+<button onclick="pay()">Pay <span id="bp">$5</span> Now</button>
+<p id="st" style="word-break:break-all;font-size:12px"></p>
+<small>Pesapal Key ZupFcY... Valid | TestOnly→LIVE after contract | Ush.00.00→20k after payment</small>
+</div>
+<script>
+const W={
+// AFRICA 54
+UG:{n:"🇺🇬 Uganda",a:"20,000 UGX",m:"MTN MoMo, Airtel, Card"}, KE:{n:"🇰🇪 Kenya",a:"645 KES",m:"M-Pesa, Airtel, Card"},
+TZ:{n:"🇹🇿 Tanzania",a:"13,050 TZS",m:"M-Pesa, Tigo, Airtel"}, RW:{n:"🇷🇼 Rwanda",a:"7,150 RWF",m:"MTN MoMo, Airtel"},
+ZM:{n:"🇿🇲 Zambia",a:"135 ZMW",m:"Airtel, MTN, Zamtel"}, MW:{n:"🇲🇼 Malawi",a:"8,850 MWK",m:"Airtel, TNM"}, 
+NG:{n:"🇳🇬 Nigeria",a:"7,700 NGN",m:"Card, Bank, USSD, Verve"}, GH:{n:"🇬🇭 Ghana",a:"81 GHS",m:"MTN MoMo, Vodafone, Card"},
+ZA:{n:"🇿🇦 South Africa",a:"92 ZAR",m:"Card, Ozow, Capitec Pay"}, ET:{n:"🇪🇹 Ethiopia",a:"715 ETB",m:"Telebirr, Card"},
+EG:{n:"🇪🇬 Egypt",a:"255 EGP",m:"Card, Fawry, Vodafone Cash"}, MA:{n:"🇲🇦 Morocco",a:"50 MAD",m:"Card, MoPay, Wafacash"},
+DZ:{n:"🇩🇿 Algeria",a:"675 DZD",m:"Card, Baridimob"}, TN:{n:"🇹🇳 Tunisia",a:"15.5 TND",m:"Card, Flouci"}, LY:{n:"🇱🇾 Libya",a:"24 LYD",m:"Card"},
+SD:{n:"🇸🇩 Sudan",a:"3,000 SDG",m:"Card, Bankak"}, BW:{n:"🇧🇼 Botswana",a:"72 BWP",m:"Orange Money, Card"},
+ZW:{n:"🇿🇼 Zimbabwe",a:"7.50 ZiG",m:"EcoCash, Card"}, MZ:{n:"🇲🇿 Mozambique",a:"320 MZN",m:"M-Pesa, Card"},
+AO:{n:"🇦🇴 Angola",a:"4,650 AOA",m:"Multicaixa, Card"}, NA:{n:"🇳🇦 Namibia",a:"92 NAD",m:"Card, eWallet"},
+CM:{n:"🇨🇲 Cameroon",a:"3,050 XAF",m:"MTN MoMo, Orange Money"}, CI:{n:"🇨🇮 Ivory Coast",a:"3,050 XOF",m:"MTN, Orange, Wave"},
+SN:{n:"🇸🇳 Senegal",a:"3,050 XOF",m:"Orange, Wave, Free Money"}, ML:{n:"🇲🇱 Mali",a:"3,050 XOF",m:"Orange Money"},
+BF:{n:"🇧🇫 Burkina Faso",a:"3,050 XOF",m:"Orange, Moov"}, BJ:{n:"🇧🇯 Benin",a:"3,050 XOF",m:"MTN, Moov"}, 
+TG:{n:"🇹🇬 Togo",a:"3,050 XOF",m:"T-Money, Moov"}, NE:{n:"🇳🇪 Niger",a:"3,050 XOF",m:"Airtel, Moov"}, 
+GW:{n:"🇬🇼 Guinea-Bissau",a:"3,050 XOF",m:"Orange Money"}, GN:{n:"🇬🇳 Guinea",a:"43,000 GNF",m:"Orange, MTN"},
+SL:{n:"🇸🇱 Sierra Leone",a:"115 SLE",m:"Africell, Orange"}, LR:{n:"🇱🇷 Liberia",a:"970 LRD",m:"MTN MoMo"},
+MR:{n:"🇲🇷 Mauritania",a:"200 MRU",m:"Bankily"}, GM:{n:"🇬🇲 Gambia",a:"355 GMD",m:"QCell, Africell"},
+CV:{n:"🇨🇻 Cape Verde",a:"510 CVE",m:"Card"}, ST:{n:"🇸🇹 Sao Tome",a:"116 STN",m:"Card"}, GQ:{n:"🇬🇶 Equatorial Guinea",a:"3,050 XAF",m:"Card"},
+GA:{n:"🇬🇦 Gabon",a:"3,050 XAF",m:"Airtel Money"}, CG:{n:"🇨🇬 Congo",a:"3,050 XAF",m:"MTN, Airtel"}, CD:{n:"🇨🇩 DR Congo",a:"14,300 CDF",m:"M-Pesa, Airtel, Orange"},
+CF:{n:"🇨🇫 CAR",a:"3,050 XAF",m:"Orange Money"}, TD:{n:"🇹🇩 Chad",a:"3,050 XAF",m:"Airtel, Moov"}, BI:{n:"🇧🇮 Burundi",a:"14,500 BIF",m:"Lumicash"},
+SO:{n:"🇸🇴 Somalia",a:"2,850 SOS",m:"EVC, Zaad"}, DJ:{n:"🇩🇯 Djibouti",a:"890 DJF",m:"Card"}, ER:{n:"🇪🇷 Eritrea",a:"75 ERN",m:"Card"},
+SS:{n:"🇸🇸 South Sudan",a:"20,000 SSP",m:"MTN, Zain"}, LS:{n:"🇱🇸 Lesotho",a:"92 LSL",m:"M-Pesa, EcoCash"},
+SZ:{n:"🇸🇿 Eswatini",a:"92 SZL",m:"MTN MoMo"}, MU:{n:"🇲🇺 Mauritius",a:"235 MUR",m:"Juice, Card"}, SC:{n:"🇸🇨 Seychelles",a:"73 SCR",m:"Card"},
+KM:{n:"🇰🇲 Comoros",a:"2,300 KMF",m:"Card"}, MG:{n:"🇲🇬 Madagascar",a:"23,000 MGA",m:"Mvola, Orange, Airtel"},
+
+// NORTH AMERICA 23
+US:{n:"🇺🇸 USA",a:"$5.00 USD",m:"Visa, MC, Amex, Apple Pay, Google Pay, CashApp"}, CA:{n:"🇨🇦 Canada",a:"$6.90 CAD",m:"Visa, MC, Interac, Apple Pay"},
+MX:{n:"🇲🇽 Mexico",a:"92 MXN",m:"Card, OXXO, SPEI"}, PA:{n:"🇵🇦 Panama",a:"$5.00 USD",m:"Card, Yappy"}, CR:{n:"🇨🇷 Costa Rica",a:"2,600 CRC",m:"Card, Sinpe"},
+GT:{n:"🇬🇹 Guatemala",a:"39 GTQ",m:"Card"}, HN:{n:"🇭🇳 Honduras",a:"130 HNL",m:"Card, Tigo Money"}, SV:{n:"🇸🇻 El Salvador",a:"$5.00 USD",m:"Card, Chivo"},
+NI:{n:"🇳🇮 Nicaragua",a:"185 NIO",m:"Card"}, DO:{n:"🇩🇴 Dominican Rep",a:"310 DOP",m:"Card"}, JM:{n:"🇯🇲 Jamaica",a:"800 JMD",m:"Card"},
+TT:{n:"🇹🇹 Trinidad",a:"34 TTD",m:"Card"}, BS:{n:"🇧🇸 Bahamas",a:"$5 BSD",m:"Card"}, BB:{n:"🇧🇧 Barbados",a:"10 BBD",m:"Card"},
+BZ:{n:"🇧🇿 Belize",a:"10 BZD",m:"Card"}, HT:{n:"🇭🇹 Haiti",a:"660 HTG",m:"Card, MonCash"}, AG:{n:"🇦🇬 Antigua",a:"13.5 XCD",m:"Card"},
+DM:{n:"🇩🇲 Dominica",a:"13.5 XCD",m:"Card"}, GD:{n:"🇬🇩 Grenada",a:"13.5 XCD",m:"Card"}, KN:{n:"🇰🇳 St Kitts",a:"13.5 XCD",m:"Card"},
+LC:{n:"🇱🇨 St Lucia",a:"13.5 XCD",m:"Card"}, VC:{n:"🇻🇨 St Vincent",a:"13.5 XCD",m:"Card"}, CU:{n:"🇨🇺 Cuba",a:"120 CUP",m:"Card"},
+
+// SOUTH AMERICA 12
+BR:{n:"🇧🇷 Brazil",a:"27 BRL",m:"Pix, Card, Boleto"}, AR:{n:"🇦🇷 Argentina",a:"4,800 ARS",m:"Mercado Pago, Card"},
+CL:{n:"🇨🇱 Chile",a:"4,750 CLP",m:"WebPay, Mach, Card"}, CO:{n:"🇨🇴 Colombia",a:"21,000 COP",m:"PSE, Nequi, Card"},
+PE:{n:"🇵🇪 Peru",a:"19 PEN",m:"Yape, Plin, Card"}, VE:{n:"🇻🇪 Venezuela",a:"185 VES",m:"Pago Movil, Card"},
+EC:{n:"🇪🇨 Ecuador",a:"$5 USD",m:"Card"}, BO:{n:"🇧🇴 Bolivia",a:"35 BOB",m:"Card, QR"}, PY:{n:"🇵🇾 Paraguay",a:"39,000 PYG",m:"Card, Tigo Money"},
+UY:{n:"🇺🇾 Uruguay",a:"205 UYU",m:"Card, Mercado Pago"}, GY:{n:"🇬🇾 Guyana",a:"1,050 GYD",m:"MMG, Card"}, SR:{n:"🇸🇷 Suriname",a:"180 SRD",m:"Card"},
+
+// EUROPE 44
+GB:{n:"🇬🇧 UK",a:"£3.95 GBP",m:"Visa, MC, Apple Pay, Google Pay"}, EU:{n:"🇪🇺 EU/Germany/France/Italy/Spain",a:"€4.65 EUR",m:"Visa, MC, SEPA, Klarna, Apple Pay"},
+CH:{n:"🇨🇭 Switzerland",a:"4.50 CHF",m:"Card, TWINT"}, NO:{n:"🇳🇴 Norway",a:"53 NOK",m:"Card, Vipps"}, SE:{n:"🇸🇪 Sweden",a:"54 SEK",m:"Card, Swish, Klarna"},
+DK:{n:"🇩🇰 Denmark",a:"35 DKK",m:"Card, MobilePay"}, IS:{n:"🇮🇸 Iceland",a:"700 ISK",m:"Card"}, RU:{n:"🇷🇺 Russia",a:"480 RUB",m:"Mir, Card"},
+UA:{n:"🇺🇦 Ukraine",a:"210 UAH",m:"Card, PrivatPay"}, PL:{n:"🇵🇱 Poland",a:"20 PLN",m:"BLIK, Card"}, CZ:{n:"🇨🇿 Czech",a:"115 CZK",m:"Card"},
+HU:{n:"🇭🇺 Hungary",a:"1,900 HUF",m:"Card"}, RO:{n:"🇷🇴 Romania",a:"23 RON",m:"Card"}, BG:{n:"🇧🇬 Bulgaria",a:"9 BGN",m:"Card"},
+TR:{n:"🇹🇷 Turkey",a:"170 TRY",m:"Card, Papara, Troy"}, GR:{n:"🇬🇷 Greece",a:"€4.65 EUR",m:"Card"}, PT:{n:"🇵🇹 Portugal",a:"€4.65 EUR",m:"MB Way, Card"},
+NL:{n:"🇳🇱 Netherlands",a:"€4.65 EUR",m:"iDEAL, Card"}, BE:{n:"🇧🇪 Belgium",a:"€4.65 EUR",m:"Bancontact, Card"},
+IE:{n:"🇮🇪 Ireland",a:"€4.65 EUR",m:"Card"}, AT:{n:"🇦🇹 Austria",a:"€4.65 EUR",m:"Card, Klarna"}, FI:{n:"🇫🇮 Finland",a:"€4.65 EUR",m:"Card, Siirto"},
+HR:{n:"🇭🇷 Croatia",a:"€4.65 EUR",m:"Card"}, RS:{n:"🇷🇸 Serbia",a:"550 RSD",m:"Card"}, BA:{n:"🇧🇦 Bosnia",a:"9 BAM",m:"Card"},
+ME:{n:"🇲🇪 Montenegro",a:"€4.65 EUR",m:"Card"}, MK:{n:"🇲🇰 N.Macedonia",a:"285 MKD",m:"Card"}, AL:{n:"🇦🇱 Albania",a:"480 ALL",m:"Card"},
+MD:{n:"🇲🇩 Moldova",a:"90 MDL",m:"Card"}, BY:{n:"🇧🇾 Belarus",a:"16 BYN",m:"Card"}, SK:{n:"🇸🇰 Slovakia",a:"€4.65 EUR",m:"Card"},
+SI:{n:"🇸🇮 Slovenia",a:"€4.65 EUR",m:"Card"}, LT:{n:"🇱🇹 Lithuania",a:"€4.65 EUR",m:"Card"}, LV:{n:"🇱🇻 Latvia",a:"€4.65 EUR",m:"Card"},
+EE:{n:"🇪🇪 Estonia",a:"€4.65 EUR",m:"Card"}, LU:{n:"🇱🇺 Luxembourg",a:"€4.65 EUR",m:"Card"}, MT:{n:"🇲🇹 Malta",a:"€4.65 EUR",m:"Card"},
+CY:{n:"🇨🇾 Cyprus",a:"€4.65 EUR",m:"Card"},
+
+// MIDDLE EAST 15
+AE:{n:"🇦🇪 UAE",a:"18.35 AED",m:"Visa, MC, Apple Pay, Mada"}, SA:{n:"🇸🇦 Saudi",a:"18.75 SAR",m:"Mada, Visa, Apple Pay"},
+QA:{n:"🇶🇦 Qatar",a:"18.20 QAR",m:"Card, Apple Pay"}, KW:{n:"🇰🇼 Kuwait",a:"1.55 KWD",m:"KNET, Card"}, BH:{n:"🇧🇭 Bahrain",a:"1.90 BHD",m:"Benefit, Card"},
+OM:{n:"🇴🇲 Oman",a:"1.92 OMR",m:"Card"}, JO:{n:"🇯🇴 Jordan",a:"3.55 JOD",m:"CliQ, Card"}, LB:{n:"🇱🇧 Lebanon",a:"450,000 LBP",m:"Card, Whish"},
+IL:{n:"🇮🇱 Israel",a:"18.50 ILS",m:"Card, Bit"}, IR:{n:"🇮🇷 Iran",a:"260,000 IRR",m:"Card, Sheba"}, IQ:{n:"🇮🇶 Iraq",a:"6,600 IQD",m:"ZainCash, Card"},
+YE:{n:"🇾🇪 Yemen",a:"2,700 YER",m:"Card"}, SY:{n:"🇸🇾 Syria",a:"65,000 SYP",m:"Card"}, PS:{n:"🇵🇸 Palestine",a:"18.50 ILS",m:"Card, JawwalPay"},
+
+// ASIA 35+
+IN:{n:"🇮🇳 India",a:"430 INR",m:"UPI, PhonePe, GPay, Paytm, Card"}, PK:{n:"🇵🇰 Pakistan",a:"1,400 PKR",m:"Easypaisa, JazzCash, Card"},
+BD:{n:"🇧🇩 Bangladesh",a:"610 BDT",m:"bKash, Nagad, Card"}, NP:{n:"🇳🇵 Nepal",a:"670 NPR",m:"eSewa, Khalti, Card"},
+LK:{n:"🇱🇰 Sri Lanka",a:"1,500 LKR",m:"Card, eZ Cash"}, BT:{n:"🇧🇹 Bhutan",a:"430 BTN",m:"Card"}, MV:{n:"🇲🇻 Maldives",a:"77 MVR",m:"Card"},
+AF:{n:"🇦🇫 Afghanistan",a:"390 AFN",m:"Card"}, JP:{n:"🇯🇵 Japan",a:"760 JPY",m:"Card, PayPay, Konbini"}, KR:{n:"🇰🇷 S.Korea",a:"6,900 KRW",m:"KakaoPay, Card"},
+CN:{n:"🇨🇳 China",a:"36 CNY",m:"UnionPay, Alipay via Card"}, HK:{n:"🇭🇰 Hong Kong",a:"39 HKD",m:"FPS, Card, Apple Pay"},
+TW:{n:"🇹🇼 Taiwan",a:"160 TWD",m:"JKO, LINE Pay, Card"}, MO:{n:"🇲🇴 Macao",a:"40 MOP",m:"Card"}, MN:{n:"🇲🇳 Mongolia",a:"17,500 MNT",m:"QPay, Card"},
+PH:{n:"🇵🇭 Philippines",a:"290 PHP",m:"GCash, Maya, Card"}, VN:{n:"🇻🇳 Vietnam",a:"125,000 VND",m:"MoMo, ZaloPay, Card"},
+TH:{n:"🇹🇭 Thailand",a:"185 THB",m:"PromptPay, TrueMoney, Card"}, LA:{n:"🇱🇦 Laos",a:"109,000 LAK",m:"BCEL One, Card"},
+KH:{n:"🇰🇭 Cambodia",a:"20,500 KHR",m:"ABA, Wing, Card"}, MM:{n:"🇲🇲 Myanmar",a:"10,500 MMK",m:"WavePay, KBZPay"},
+MY:{n:"🇲🇾 Malaysia",a:"23.50 MYR",m:"FPX, GrabPay, Touch n Go"}, SG:{n:"🇸🇬 Singapore",a:"6.70 SGD",m:"PayNow, GrabPay, Card"},
+ID:{n:"🇮🇩 Indonesia",a:"82,000 IDR",m:"GoPay, OVO, DANA, Card"}, BN:{n:"🇧🇳 Brunei",a:"6.70 BND",m:"Card"}, TL:{n:"🇹🇱 Timor",a:"$5 USD",m:"Card"},
+KZ:{n:"🇰🇿 Kazakhstan",a:"2,600 KZT",m:"Kaspi, Card"}, UZ:{n:"🇺🇿 Uzbekistan",a:"64,000 UZS",m:"Payme, Click, Card"},
+KG:{n:"🇰🇬 Kyrgyzstan",a:"440 KGS",m:"Elsom, Card"}, TJ:{n:"🇹🇯 Tajikistan",a:"55 TJS",m:"Card"}, TM:{n:"🇹🇲 Turkmenistan",a:"17.5 TMT",m:"Card"},
+
+// OCEANIA 14
+AU:{n:"🇦🇺 Australia",a:"$7.80 AUD",m:"Card, PayID, Apple Pay"}, NZ:{n:"🇳🇿 New Zealand",a:"$8.50 NZD",m:"Card, Apple Pay"},
+FJ:{n:"🇫🇯 Fiji",a:"11.5 FJD",m:"M-PAiSA, Card"}, PG:{n:"🇵🇬 PNG",a:"20 PGK",m:"Card"}, SB:{n:"🇸🇧 Solomon",a:"42 SBD",m:"Card"},
+VU:{n:"🇻🇺 Vanuatu",a:"610 VUV",m:"Card"}, WS:{n:"🇼🇸 Samoa",a:"13.5 WST",m:"Card"}, TO:{n:"🇹🇴 Tonga",a:"12 TOP",m:"Card"},
+KI:{n:"🇰🇮 Kiribati",a:"7.80 AUD",m:"Card"}, MH:{n:"🇲🇭 Marshall",a:"$5 USD",m:"Card"}, FM:{n:"🇫🇲 Micronesia",a:"$5 USD",m:"Card"},
+PW:{n:"🇵🇼 Palau",a:"$5 USD",m:"Card"}, NR:{n:"🇳🇷 Nauru",a:"7.80 AUD",m:"Card"}, TV:{n:"🇹🇻 Tuvalu",a:"7.80 AUD",m:"Card"}
+};
+const sel=document.getElementById('c');
+for(const k in W){const o=document.createElement('option');o.value=k;o.textContent=`${W[k].n} - ${W[k].a} - ${W[k].m}`;sel.appendChild(o);}
+function upd(){const p=W[sel.value];document.getElementById('show').innerHTML=`<b>${p.n}</b><br>💰 Pay: <b>${p.a}</b><br>💳 Method: ${p.m}<br>✅ You get: <b>20,000 UGX → MTN 0789525512</b><br><small>$5 worldwide converted</small>`;document.getElementById('bp').innerText=p.a;}
+sel.value="UG";upd();
+async function pay(){
+const ipn=document.getElementById('ipn').value.trim();
+if(!ipn){alert('First open: yoursite.vercel.app/api/pesapal/register-ipn and paste ipn_id here!');return;}
+const b=document.querySelector('button');b.innerText='Processing...';
+try{
+const r=await fetch('/api/pesapal/create-order?ipn_id='+encodeURIComponent(ipn),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({currency:sel.value,email:document.getElementById('email').value,phone:document.getElementById('phone').value,name:document.getElementById('name').value,country:W[sel.value].n})});
+const d=await r.json();document.getElementById('st').innerText=JSON.stringify(d,null,2);
+if(d.redirect_url) window.location.href=d.redirect_url;
+}catch(e){document.getElementById('st').innerText=e.message;}
+b.innerHTML='Pay <span id="bp">'+W[sel.value].a+'</span> Now';
+}
+</script></body></html>
